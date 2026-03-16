@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Top Boy Barber Shop | Book Now</title>
+    <meta
+      name="description"
+      content="Top Boy Barber Shop custom online appointment booking system."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="page-shell page-book">
+    <div class="bg-orb orb-1"></div>
+    <div class="bg-orb orb-2"></div>
+    <div class="bg-grid"></div>
+
+    <header class="site-header">
+      <div class="container nav-wrap">
+        <a href="index.html" class="brand" aria-label="Top Boy Barber Shop Home">
+          <span class="brand-mark"><img src="assets/topboylogo.png" alt="Top Boy logo" loading="eager" /></span>
+          <span class="brand-text">
+            Top Boy
+            <small>Barber Shop</small>
+          </span>
+        </a>
+        <nav class="nav-links" aria-label="Main navigation">
+          <a href="index.html">Home</a>
+          <a href="contact.html">Contact</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="section" id="booking-start">
+        <div class="container reveal">
+          <h1>
+            TopBoy
+            <span class="headline-accent">Appointment System</span>
+          </h1>
+          <p class="hero-sub">
+            Same booking style and flow as modern systems: choose service, date, time, then confirm your appointment.
+          </p>
+        </div>
+
+        <div class="container booking-system-wrap reveal magnetic-card">
+          <div class="booking-progress" aria-label="Booking steps">
+            <div class="step-dot active" data-step-dot="1">1<span>Service</span></div>
+            <div class="step-dot" data-step-dot="2">2<span>Date & Time</span></div>
+            <div class="step-dot" data-step-dot="3">3<span>Details</span></div>
+            <div class="step-dot" data-step-dot="4">4<span>Confirm</span></div>
+          </div>
+
+          <div class="booking-step active" data-step="1">
+            <h3>Select service</h3>
+            <div class="service-options" id="serviceOptions"></div>
+          </div>
+
+          <div class="booking-step" data-step="2">
+            <h3>Pick date and time</h3>
+
+            <div class="calendar-wrap" id="calendarWrap">
+              <div class="calendar-head">
+                <button type="button" class="calendar-nav" id="prevMonth" aria-label="Previous month">‹</button>
+                <p id="calendarMonthLabel" class="calendar-month-label">Month</p>
+                <button type="button" class="calendar-nav" id="nextMonth" aria-label="Next month">›</button>
+              </div>
+              <div class="calendar-weekdays">
+                <span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span>
+              </div>
+              <div id="calendarGrid" class="calendar-grid"></div>
+            </div>
+
+            <p class="selected-date-label" id="selectedDateLabel">Select a date first to open available times.</p>
+
+            <div id="timeOverlay" class="time-overlay is-hidden" aria-hidden="true">
+              <div class="time-overlay-backdrop" id="timeOverlayBackdrop"></div>
+              <div class="time-overlay-panel">
+                <div class="time-overlay-head">
+                  <p class="slots-title" id="overlayTitle">Available times</p>
+                  <button type="button" class="calendar-nav" id="closeTimeOverlay" aria-label="Close times">×</button>
+                </div>
+                <div class="slot-grid" id="slotGrid"></div>
+              </div>
+            </div>
+            <div class="booking-nav-actions">
+              <button type="button" class="btn btn-ghost" id="backTo1">Back</button>
+              <button type="button" class="btn" id="toStep3" disabled>Continue</button>
+            </div>
+          </div>
+
+          <div class="booking-step" data-step="3">
+            <h3>Your details</h3>
+            <div class="booking-grid-2">
+              <div class="form-row">
+                <label for="customerName">Full Name</label>
+                <input type="text" id="customerName" placeholder="e.g. John Smith" />
+              </div>
+              <div class="form-row">
+                <label for="customerPhone">Phone</label>
+                <input type="tel" id="customerPhone" placeholder="e.g. +30 69..." />
+              </div>
+            </div>
+            <div class="form-row">
+              <label for="customerNotes">Notes (optional)</label>
+              <textarea id="customerNotes" rows="3" placeholder="Style details..."></textarea>
+            </div>
+            <div class="booking-nav-actions">
+              <button type="button" class="btn btn-ghost" id="backTo2">Back</button>
+              <button type="button" class="btn" id="toStep4">Review booking</button>
+            </div>
+          </div>
+
+          <div class="booking-step" data-step="4">
+            <h3>Confirm appointment</h3>
+            <div id="bookingSummary" class="booking-summary"></div>
+            <p id="bookingMessage" class="form-message" aria-live="polite"></p>
+            <div class="booking-nav-actions">
+              <button type="button" class="btn btn-ghost" id="backTo3">Back</button>
+              <button type="button" class="btn" id="confirmBooking">Confirm Appointment</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="container reveal">
+          <div class="hero-card upcoming-wrap">
+            <div class="card-badge">Upcoming</div>
+            <h3>Booked appointments (Demo)</h3>
+            <ul id="upcomingList" class="upcoming-list"></ul>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-wrap">
+        <p>© <span id="year"></span> Top Boy Barber Shop · Book Now</p>
+        <a href="index.html">Top Boy Home ↑</a>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
