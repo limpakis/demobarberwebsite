@@ -2,6 +2,7 @@ const year = document.getElementById("year");
 const navLinks = Array.from(document.querySelectorAll(".nav-links a"));
 const pageShell = document.querySelector(".page-shell");
 const isBookPage = document.body.classList.contains("page-book");
+const isThankYouPage = document.body.classList.contains("page-thank-you");
 
 if (year) {
   year.textContent = new Date().getFullYear();
@@ -83,6 +84,32 @@ magneticCards.forEach((card) => {
     card.style.transform = "";
   });
 });
+
+if (isThankYouPage) {
+  const params = new URLSearchParams(window.location.search);
+  const name = params.get("name") || "client";
+  const service = params.get("service") || "-";
+  const date = params.get("date") || "-";
+  const time = params.get("time") || "-";
+
+  const thankYouName = document.getElementById("thankYouName");
+  const thankYouService = document.getElementById("thankYouService");
+  const thankYouDate = document.getElementById("thankYouDate");
+  const thankYouTime = document.getElementById("thankYouTime");
+
+  if (thankYouName) {
+    thankYouName.textContent = name;
+  }
+  if (thankYouService) {
+    thankYouService.textContent = service;
+  }
+  if (thankYouDate) {
+    thankYouDate.textContent = date;
+  }
+  if (thankYouTime) {
+    thankYouTime.textContent = time;
+  }
+}
 
 if (isBookPage) {
   const STORAGE_KEY = "topboy-appointments";
@@ -504,8 +531,14 @@ if (isBookPage) {
 
     appointments.push(appointment);
     saveAppointments(appointments);
-    bookingMessage.textContent = "Appointment confirmed for TopBoy Barber Shop.";
-    renderUpcoming();
+    const thankYouParams = new URLSearchParams({
+      name: appointment.name,
+      service: appointment.service,
+      date: formatDate(appointment.date),
+      time: appointment.time,
+    });
+
+    window.location.href = `thank-you.html?${thankYouParams.toString()}`;
   });
 
   renderServices();
